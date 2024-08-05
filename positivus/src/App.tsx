@@ -1,86 +1,56 @@
 import Logo from "./assets/Icon.svg";
-import Megafone from "./assets/Illustration.png";
-import Amazon from "./assets/logos/Company logo.png";
-import Drilbble from "./assets/logos/Company logo-1.png";
-import Hubspot from "./assets/logos/Company logo-2.png";
-import Notion from "./assets/logos/Company logo-3.png";
-import Netflix from "./assets/logos/Company logo-4.png";
-import Zoom from "./assets/logos/Company logo-5.png";
+import Arrow from "./assets/card_imgs/Arrow 1.svg"
 import "./index.css";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { NavBarItems } from "./components/NavBarItems.tsx"
+import { useState } from "react";
+import { AboutUs } from "./sections/AboutUsSection.tsx";
+import Search_engine from "./assets/card_imgs/Search_engine.png"
 
 export function App() {
+  const [isNavBarhidden, setNavBarhidden] = useState(false)
+
+  function changeNavBar(){
+    isNavBarhidden ? setNavBarhidden(false) : setNavBarhidden(true)
+  }
+
 
   return (
-    <main className="mb-36">
-      <section className="mx-5 sm:mx-24">
-        <header className="my-7  sm:my-14 flex items-center text-xl">
+    <main className="mb-36 mx-5 lg:mx-24">
+      <header className="my-7 lg:my-14 flex items-center text-xl">
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center text-3xl font-semibold">
               <img src={Logo} /> Positivus
             </div>
-            <div className="absolute top-7 right-10 z-10 space-x-1 text-end flex sm:sm:relative sm:top-auto sm:right-auto sm:space-x-0 sm:text-left">
-              <ul className="flex items-center flex-col text-lg bg-zinc-100 gap-4 sm:flex-row sm:bg-transparent sm:justify-end sm:gap-10">
-                <li>About us</li>
-                <li>Services</li>
-                <li>Use Cases</li>
-                <li>Pricing</li>
-                <li>Blog</li>
-                <li>
-                  <div className="px-1 py-1 m-2 text-center border-solid border border-black rounded-xl sm:px-7 sm:py-5 sm:m-0">
-                    Request a quote
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <FontAwesomeIcon icon={faBars} className=" sm:hidden"/>
+            {isNavBarhidden ? <NavBarItems variant="opened"/> : <NavBarItems variant="hidden"/>}
+            <FontAwesomeIcon onClick={changeNavBar} icon={faBars} className=" lg:hidden"/>
           </div>
         </header>
-        <div className="columns-2 flex gap-28 mb-16">
-          <div className="flex-1 space-y-9">
-            <h1 className="text-6xl font-semibold text-left text-pretty w-4/5">
-              Navigating the digital landscape for success
-            </h1>
-            <p className="text-left max-w-lg text-xl">
-              Our digital marketing agency helps businesses grow and succeed
-              online through a range of services including SEO, PPC, social
-              media marketing, and content creation.
-            </p>
-            <button className="text-white text-center px-9 py-5 bg-neutral-900 border rounded-xl">
-              Book a consultation
-            </button>
-          </div>
 
-          <figure>
-            <img src={Megafone} alt="" className="text-right" />
-          </figure>
-        </div>
+      <AboutUs />
 
+      <section className="mt-14">
         <div>
-          <ul className="flex gap-28">
-            <li>
-              <img src={Amazon} alt="" className="flex-1" />
-            </li>
-            <li>
-              <img src={Drilbble} alt="" className="flex-1" />
-            </li>
-            <li>
-              <img src={Hubspot} alt="" className="flex-1" />
-            </li>
-            <li>
-              <img src={Notion} alt="" className="flex-1" />
-            </li>
-            <li>
-              <img src={Netflix} alt="" className="flex-1" />
-            </li>
-            <li>
-              <img src={Zoom} alt="" className="flex-1" />
-            </li>
-          </ul>
+          <div className="flex flex-col items-center justify-center lg:flex-row lg:justify-start">
+            <h2 className="bg-lime-300 inline text-4xl font-medium p-1 rounded-md">Services</h2>
+            <p className="mt-7 text-lg text-center text-balance lg:mt-0 lg:ml-10 lg:text-left lg:w-3/5">At our digital marketing agency, we offer a range of services to help businesses grow and succeed online. These services include:</p>
+          </div>
         </div>
+        <div>
+          <div className="w-full p-12 bg-zinc-100 rounded-3xl border-solid border-black border">
+            <div className="">
+              <h3 className="bg-lime-300 inline text-2xl font-medium p-1 rounded-md">Search engine <br /> optimization</h3>
+              <div className="mt-6 flex flex-row">
+                <img src={Search_engine} alt="" />
+                <span className="rounded-full w-10 h-10 bg-black flex items-center justify-center text-zinc-100"><img src={Arrow} alt="" /></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div></div>
       </section>
+
     </main>
   );
 }
